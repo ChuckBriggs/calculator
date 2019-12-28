@@ -1,3 +1,5 @@
+let displayValue = '1234567890';
+
 function add(a, b) {
 	return a + b;
 }
