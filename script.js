@@ -147,6 +147,7 @@ function evaluateEquation() {
 				}
 			}
 		}
+		//fix hanging when working with negative output
 		displayValue = operand[0];
 		updateDisplay();
 		console.log(operand);
