@@ -35,17 +35,18 @@ button:hover {
 	text-align: right;
 	font-family: courier, monospace;
 	font-size: 32px;
+	overflow: scroll;
 }
 
-.funcBtn {
+.darkBtn {
 	background-color: #aaa;
 }
 
-.numBtn {
+.lightBtn {
 	background-color: #eee;
 }
 
-#eqBtn {
+.wideBtn {
 	grid-column: span 2;
 }
 
