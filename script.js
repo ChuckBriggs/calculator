@@ -96,7 +96,6 @@ function convertToNum(string) {
 
 function evaluateEquation() {
 	let a = displayValue.slice(-1);
-
 	if (a >= '0' && a <= '9') {
 		if (displayValue[0] == '-') {
 			console.log('first char minus');
@@ -118,7 +117,6 @@ function evaluateEquation() {
 				index++;
 			}
 		}
-
 		while (operator[0]) {
 			for (i = 0; i < operator.length; i++) {
 				if (operator[i] == '\xd7') {
@@ -143,7 +141,6 @@ function evaluateEquation() {
 					}
 				}
 			}
-
 			for (i = 0; i < operator.length; i++) {
 				if (operator[i] == '+') {
 					let tempNum = operate('+', convertToNum(operand[i]), convertToNum(operand[i+1]));
@@ -161,26 +158,9 @@ function evaluateEquation() {
 				}
 			}
 		}
-		//fix hanging when working with negative output
 		displayValue = operand[0];
 		updateDisplay();
-		console.log(operand);
-		console.log(operator);
-	} else {
-		console.log('no eval');
 	}
-console.log('testing123');
-//					console.log('operand[i]:');
-//					console.log(operand[i]);
-//					console.log('toNum operand[i]:');
-//					console.log(convertToNum(operand[i]));
-//					console.log('operand[i+1]:');
-//					console.log(operand[i+1]);
-//					console.log('toNum operand[i+1]:');
-//					console.log(convertToNum(operand[i+1]));
-//					console.log('tempNum:');
-//					console.log(tempNum);
-
 	updateDisplay();
 }
 
@@ -192,8 +172,82 @@ const funcBtns = document.querySelectorAll('.funcBtn');
 funcBtns.forEach(button =>{
 	button.addEventListener('click', checkValidity);
 })
-document.querySelector('#clearBtn').addEventListener('click', clearAll);
-document.querySelector('#deleteBtn').addEventListener('click', deleteLast);
-document.querySelector('#eqBtn').addEventListener('click', evaluateEquation);
+document.querySelector('#btnCLR').addEventListener('click', clearAll);
+document.querySelector('#btnDEL').addEventListener('click', deleteLast);
+document.querySelector('#btnEQ').addEventListener('click', evaluateEquation);
+
+window.addEventListener('keydown', e => {
+	let btnPushed;
+	switch(e.key) {
+		case '0':
+			btnPushed = document.getElementById('btn0');
+			break;
+		case '1':
+			btnPushed = document.getElementById('btn1');
+			break;
+		case '2':
+			btnPushed = document.getElementById('btn2');
+			break;
+		case '3':
+			btnPushed = document.getElementById('btn3');
+			break;
+		case '4':
+			btnPushed = document.getElementById('btn4');
+			break;
+		case '5':
+			btnPushed = document.getElementById('btn5');
+			break;
+		case '6':
+			btnPushed = document.getElementById('btn6');
+			break;
+		case '7':
+			btnPushed = document.getElementById('btn7');
+			break;
+		case '8':
+			btnPushed = document.getElementById('btn8');
+			break;
+		case '9':
+			btnPushed = document.getElementById('btn9');
+			break;
+		case '1':
+			btnPushed = document.getElementById('btn1');
+			break;
+		case '+':
+			btnPushed = document.getElementById('btnPLUS');
+			e.preventDefault();
+			break;
+		case '-':
+			btnPushed = document.getElementById('btnMINUS');
+			e.preventDefault();
+			break;
+		case '*':
+			btnPushed = document.getElementById('btnTIMES');
+			e.preventDefault();
+			break;
+		case '/':
+			btnPushed = document.getElementById('btnDIV');
+			e.preventDefault();
+			break;
+		case 'Enter':
+		case '=':
+			btnPushed = document.getElementById('btnEQ');
+			e.preventDefault();
+			break;
+		case 'Escape':
+			btnPushed = document.getElementById('btnCLR');
+			e.preventDefault();
+			break;
+		case 'Backspace':
+		case 'Delete':
+			btnPushed = document.getElementById('btnDEL');
+			e.preventDefault();
+			break;
+		default:
+			break;
+	}
+	if (btnPushed) {
+		btnPushed.click();
+	}
+});
 
 updateDisplay();
