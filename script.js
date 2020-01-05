@@ -18,7 +18,8 @@ function divide(a, b) {
 	if (b) {
 		return a / b;
 	} else {
-		console.log('The universe implodes.');
+		displayValue = 'error; div/0.';
+		updateDisplay;
 	}
 }
 
@@ -97,6 +98,10 @@ function evaluateEquation() {
 	let a = displayValue.slice(-1);
 
 	if (a >= '0' && a <= '9') {
+		if (displayValue[0] == '-') {
+			console.log('first char minus');
+			displayValue = '0' + displayValue;
+		}
 		let operator = [];
 		let operand = [];
 		let index = 0;
@@ -113,6 +118,7 @@ function evaluateEquation() {
 				index++;
 			}
 		}
+
 		while (operator[0]) {
 			for (i = 0; i < operator.length; i++) {
 				if (operator[i] == '\xd7') {
@@ -123,13 +129,21 @@ function evaluateEquation() {
 					i = -1;
 				}
 				if (operator[i] == '/') {
-					let tempNum = operate('/', convertToNum(operand[i]), convertToNum(operand[i+1]));
-					operand[i+1] = tempNum.toString();
-					operator.splice(i, 1);
-					operand.splice(i, 1);
-					i = -1;
+					if (convertToNum(operand[i+1]) != 0) {
+						let tempNum = operate('/', convertToNum(operand[i]), convertToNum(operand[i+1]));
+						operand[i+1] = tempNum.toString();
+						operator.splice(i, 1);
+						operand.splice(i, 1);
+						i = -1;
+					} else {
+						displayValue = 'div/0 error';
+						updateDisplay();
+						displayValue = '0';
+						return;
+					}
 				}
 			}
+
 			for (i = 0; i < operator.length; i++) {
 				if (operator[i] == '+') {
 					let tempNum = operate('+', convertToNum(operand[i]), convertToNum(operand[i+1]));
@@ -138,7 +152,7 @@ function evaluateEquation() {
 					operand.splice(i, 1);
 					i = -1;
 				}
-				if (operator[i] == '\u2212') {
+				if (operator[i] == '-') {
 					let tempNum = operate('-', convertToNum(operand[i]), convertToNum(operand[i+1]));
 					operand[i+1] = tempNum.toString();
 					operator.splice(i, 1);
@@ -166,11 +180,6 @@ console.log('testing123');
 //					console.log(convertToNum(operand[i+1]));
 //					console.log('tempNum:');
 //					console.log(tempNum);
-
-	//c check if last character is number
-	// check if there are operators
-	// if there are mult or div operators, do them
-	// if there are add or sub operators, do them 
 
 	updateDisplay();
 }
