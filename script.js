@@ -98,14 +98,12 @@ function evaluateEquation() {
 	let a = displayValue.slice(-1);
 	if (a >= '0' && a <= '9') {
 		if (displayValue[0] == '-') {
-			console.log('first char minus');
 			displayValue = '0' + displayValue;
 		}
 		let operator = [];
 		let operand = [];
 		let index = 0;
 		for (i = 0; i < displayValue.length; i++) {
-			console.log(displayValue[i]);
 			if (displayValue[i] >= '0' && displayValue[i] <= '9' || displayValue[i] == '.') {
 				if (operand[index]) {
 					operand[index] += displayValue[i];
