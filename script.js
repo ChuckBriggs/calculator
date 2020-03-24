@@ -207,8 +207,8 @@ window.addEventListener('keydown', e => {
 		case '9':
 			btnPushed = document.getElementById('btn9');
 			break;
-		case '1':
-			btnPushed = document.getElementById('btn1');
+		case '.':
+			btnPushed = document.getElementById('btnDOT');
 			break;
 		case '+':
 			btnPushed = document.getElementById('btnPLUS');
